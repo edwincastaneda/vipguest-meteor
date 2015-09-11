@@ -1,0 +1,178 @@
+<head>
+    <title>VipGuest</title>
+</head>
+
+<body>
+
+</body>
+
+<template name="topMenuAdmin">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>VipGuest</span> Admin</a>
+                <ul class="user-menu">
+                    <li class="dropdown pull-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
+                            Hi, {{currentUser.profile}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                            <li><a id="logout" href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </nav>
+</template>
+
+<template name="sidebarMenuAdmin">
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <ul class="nav menu">
+            <li class="{{isActivePath '/'}}"><a href="/"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+            <li class="{{isActivePath '/cards'}}"><a href="/cards"><span class="glyphicon glyphicon-envelope"></span> Cards</a></li>
+            <li class="parent">
+                <a href="#"><span class="glyphicon glyphicon-book"></span> RSVP
+                    <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span> 
+                </a>
+                <ul class="children collapse" id="sub-item-1">
+                    <li>
+                        <a class="" href="#">
+                            <span class="glyphicon glyphicon-share-alt"></span> Invitados
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="#">
+                            <span class="glyphicon glyphicon-share-alt"></span> Familias/Grupos
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="#">
+                            <span class="glyphicon glyphicon-share-alt"></span> Mesas
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="{{isActivePath '/gifts'}}"><a href="/gifts"><span class="glyphicon glyphicon-gift"></span> Gifts</a></li>
+            <li class="{{isActivePath '/croquis'}}"><a href="/croquis"><span class="glyphicon glyphicon-map-marker"></span> Croquis</a></li>
+            <li class="{{isActivePath '/outfit'}}"><a href="/outfit"><span class="glyphicon glyphicon-tags"></span> Outfit</a></li>
+            <li role="presentation" class="divider"></li>
+        </ul>
+    </div>
+</template>
+
+<template name="login">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">Log in</div>
+                <div class="panel-body">
+                    <form role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="E-mail" type="email" autofocus="" name="loginEmail">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" type="password" value="" name="loginPassword">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="Remember Me" name="loginRememberAdmin">Remember Me
+                                </label>
+                            </div>
+                            <button type="submit" id="login" class="btn btn-primary">Login</button>
+                            <a href="/register" id="register" class="btn btn-primary">Register</a>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="register">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">Register</div>
+                <div class="panel-body">
+                    <form role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="User" type="text" value="" name="registerUser">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="E-mail" type="email" autofocus="" name="registerEmail">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" type="password" value="" name="registerPassword">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Nickname" type="text" value="" name="registerNick">
+                            </div>
+                            <button type="submit" id="register" class="btn btn-primary">Register</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
+
+<template name="dashboardAdmin">
+    {{#if currentUser}}
+        {{> topMenuAdmin}}
+        {{> sidebarMenuAdmin}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="cardsAdmin">
+    {{#if currentUser}}
+        {{> topMenuAdmin}}
+        {{> sidebarMenuAdmin}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="giftsAdmin">
+    {{#if currentUser}}
+        {{> topMenuAdmin}}
+        {{> sidebarMenuAdmin}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="croquisAdmin">
+    {{#if currentUser}}
+        {{> topMenuAdmin}}
+        {{> sidebarMenuAdmin}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="outfitAdmin">
+    {{#if currentUser}}
+        {{> topMenuAdmin}}
+        {{> sidebarMenuAdmin}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
